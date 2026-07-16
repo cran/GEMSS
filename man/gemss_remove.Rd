@@ -58,10 +58,9 @@ in the training set. The point that yields the smallest criterion value
 is removed. The predictive R-squared
 is then calculated on the validation set to evaluate the performance of the reduced dataset.
 
-If there exists a reduced dataset with a predictive R-squared value
-greater than the specified \code{threshold}, the algorithm reports
-the subset that maximizes the R-squared. Otherwise, no removal
-is suggested.
+If there exists a reduced dataset with a predictive R-squared value greater than
+the specified \code{threshold}, the algorithm reports the subset that maximizes
+the R-squared. Otherwise, no removal is suggested.
 }
 \examples{
 # Generate 1D data with intentionally clustered (redundant) points
@@ -76,8 +75,7 @@ X_val <- as.matrix(seq(0.05, 0.95, length.out = 20))
 Y_val <- sin(2 * pi * X_val) + rnorm(20, sd = 0.05)
 
 # Run GEMSS removal
-res <- gemss_remove(X, Y, X_val, Y_val, n_remove = 10,
-covtype = "Matern3_2", verbose = TRUE)
+res <- gemss_remove(X, Y, X_val, Y_val, n_remove = 10, covtype = "Matern3_2", verbose = TRUE)
 
 # View the indices of the removed points
 print(res$remove)
@@ -91,8 +89,7 @@ points(X[res$remove], Y[res$remove], pch = 19, col = 2)
 x_seq <- as.matrix(seq(0, 1, 0.02))
 gp_bf <- hetGP::mleHomGP(X, Y, covtype = "Matern3_2")
 lines(x_seq, predict(gp_bf, x_seq)$mean, col = 1, lty = 2)
-gp_af <- hetGP::mleHomGP(X[-res$remove, , drop = FALSE],
-Y[-res$remove], covtype = "Matern3_2")
+gp_af <- hetGP::mleHomGP(X[-res$remove, , drop = FALSE], Y[-res$remove], covtype = "Matern3_2")
 lines(x_seq, predict(gp_af, x_seq)$mean, col = 3)
 
 }

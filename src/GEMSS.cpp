@@ -211,14 +211,14 @@ Rcpp::List GEMSS_cpp_update_sig(const arma::mat& X, const arma::vec& Y, const ar
 
     y_scr = Y.elem(scr_ind);
     d_y = y_scr - mu_s;
-    d_y %= d_y;
+    d_y = arma::square(d_y);
 
     if (c1 == -1.0) {
       arma::vec tmp1 = d_y;
-      tmp1 %= tmp1;
+      tmp1 = arma::square(tmp1);
 
       arma::vec tmp2 = var_s;
-      tmp2 %= tmp2;
+      tmp2 = arma::square(tmp2);
       tmp2 *= 3.0;
 
       tmp1 /= tmp2;
